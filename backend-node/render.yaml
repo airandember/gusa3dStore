@@ -1,0 +1,12 @@
+# Render.com Blueprint
+# Deploy by connecting your GitHub repo to Render
+
+services:
+  - type: web
+    name: kids-3d-store-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production

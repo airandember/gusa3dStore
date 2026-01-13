@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+frontend/build/
+frontend/.svelte-kit/
+
+# Data files (regenerated on startup)
+backend-node/store.json
+backend/store.json
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Old Go backend (optional - remove if you want to keep it)
+backend/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
