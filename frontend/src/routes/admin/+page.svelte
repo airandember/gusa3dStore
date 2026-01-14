@@ -158,7 +158,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Dashboard - 3D Kids Print Shop ⚙️</title>
+	<title>Admin Dashboard - GUSA3D ⚙️</title>
 </svelte:head>
 
 <div class="admin-page">

@@ -24,7 +24,7 @@
 			<nav class="nav">
 				<a href="/" class="logo">
 					<span class="logo-icon">🖨️</span>
-					<span class="logo-text">3D Kids Print Shop</span>
+					<span class="logo-text">GUSA3D</span>
 				</a>
 				
 				<button class="mobile-menu-btn" on:click={() => mobileMenuOpen = !mobileMenuOpen}>
@@ -69,7 +69,7 @@
 		<div class="container">
 			<div class="footer-content">
 				<div class="footer-brand">
-					<span class="footer-logo">🖨️ 3D Kids Print Shop</span>
+					<span class="footer-logo">🖨️ GUSA3D</span>
 					<p>Made with ❤️ by kids, for kids!</p>
 				</div>
 				<div class="footer-links">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>© 2026 3D Kids Print Shop - All prints made by awesome kids aged 11-13! 🌟</p>
+				<p>© 2026 GUSA3D - All prints made by awesome kids aged 11-13! 🌟</p>
 			</div>
 		</div>
 	</footer>

@@ -1,6 +1,8 @@
-# 🖨️ 3D Kids Print Shop
+# 🖨️ GUSA3D
 
-A fun, colorful e-commerce proof of concept for a store run by kids aged 11-13 who sell 3D printed items!
+**www.gusa3d.store**
+
+A fun, colorful e-commerce store run by kids aged 11-13 who sell 3D printed items!
 
 ## 🌟 Features
 

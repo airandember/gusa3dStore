@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>3D Kids Print Shop - Awesome 3D Prints by Kids! 🚀</title>
+	<title>GUSA3D - Awesome 3D Prints by Kids! 🚀</title>
 </svelte:head>
 
 <div class="home">

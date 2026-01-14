@@ -33,7 +33,7 @@ function generateTrackingCode() {
 
 // Health check
 app.get('/', (req, res) => {
-  res.json({ status: 'ok', message: '🖨️ Kids 3D Print Store API (Supabase Edition)' });
+  res.json({ status: 'ok', message: '🖨️ GUSA3D API' });
 });
 
 // ==================== PRODUCTS ====================
@@ -504,6 +504,6 @@ app.get('/api/admin/stats', async (req, res) => {
 // ==================== START SERVER ====================
 
 app.listen(PORT, () => {
-  console.log(`🚀 Kids 3D Print Store API running on http://localhost:${PORT}`);
+  console.log(`🚀 GUSA3D API running on http://localhost:${PORT}`);
   console.log(`📦 Connected to Supabase: ${supabaseUrl}`);
 });

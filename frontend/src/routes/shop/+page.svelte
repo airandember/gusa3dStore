@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { productApi, cartApi, type Product } from '$lib/api';
 	import { cart, toasts, categories, selectedCategory } from '$lib/stores';
+	import confetti from 'canvas-confetti';
 
 	let products: Product[] = [];
 	let filteredProducts: Product[] = [];
@@ -28,8 +29,61 @@
 		}
 	});
 
-	async function addToCart(product: Product) {
+	// 🎉 Confetti explosion from button!
+	function fireConfetti(event: MouseEvent) {
+		const button = event.currentTarget as HTMLElement;
+		const rect = button.getBoundingClientRect();
+		const x = (rect.left + rect.width / 2) / window.innerWidth;
+		const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+		// First burst - colorful confetti
+		confetti({
+			particleCount: 80,
+			spread: 70,
+			origin: { x, y },
+			colors: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#A855F7', '#3B82F6', '#22C55E'],
+			startVelocity: 30,
+			gravity: 0.8,
+			scalar: 1.2,
+			ticks: 60
+		});
+
+		// Second burst - stars/sparkles
+		setTimeout(() => {
+			confetti({
+				particleCount: 40,
+				spread: 100,
+				origin: { x, y },
+				shapes: ['star'],
+				colors: ['#FFD700', '#FFA500', '#FF69B4'],
+				startVelocity: 25,
+				gravity: 0.6,
+				scalar: 1.5,
+				ticks: 50
+			});
+		}, 100);
+
+		// Third burst - small firework effect
+		setTimeout(() => {
+			confetti({
+				particleCount: 30,
+				spread: 360,
+				origin: { x, y },
+				startVelocity: 20,
+				gravity: 0.5,
+				scalar: 0.8,
+				ticks: 40,
+				colors: ['#FF6B6B', '#4ECDC4', '#FFE66D']
+			});
+		}, 200);
+	}
+
+	async function addToCart(product: Product, event: MouseEvent) {
 		addingToCart = product.id;
+		
+		// Fire confetti immediately for instant feedback!
+		fireConfetti(event);
+		
 		try {
 			await cartApi.add(product.id, 1);
 			const items = await cartApi.get();
@@ -74,7 +128,7 @@
 </script>
 
 <svelte:head>
-	<title>Shop - 3D Kids Print Shop 🛍️</title>
+	<title>Shop - GUSA3D 🛍️</title>
 </svelte:head>
 
 <div class="shop">
@@ -141,7 +195,7 @@
 								<span class="price">{product.price.toFixed(2)}</span>
 								<button
 									class="btn btn-primary add-to-cart-btn"
-									on:click={() => addToCart(product)}
+									on:click={(e) => addToCart(product, e)}
 									disabled={addingToCart === product.id || product.in_stock === 0}
 								>
 									{#if addingToCart === product.id}

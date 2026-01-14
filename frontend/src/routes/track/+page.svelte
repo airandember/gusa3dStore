@@ -76,7 +76,7 @@
 </script>
 
 <svelte:head>
-	<title>Track Order - 3D Kids Print Shop 📦</title>
+	<title>Track Order - GUSA3D 📦</title>
 </svelte:head>
 
 <div class="track-page">
@@ -226,7 +226,7 @@
 				<div class="help-card">
 					<span class="help-icon">📧</span>
 					<h4>Email Us</h4>
-					<p>help@3dkidsprint.shop</p>
+					<p>help@gusa3d.store</p>
 				</div>
 				<div class="help-card">
 					<span class="help-icon">💬</span>

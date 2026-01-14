@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>Cart - 3D Kids Print Shop 🛒</title>
+	<title>Cart - GUSA3D 🛒</title>
 </svelte:head>
 
 <div class="cart-page">
