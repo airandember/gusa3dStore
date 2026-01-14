@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { productApi, adminApi, type Product, type Order, type AdminStats } from '$lib/api';
+	import { goto } from '$app/navigation';
+	import { productApi, adminApi } from '$lib/api';
+	import type { Product, Order } from '$lib/supabase';
 	import { toasts, categories } from '$lib/stores';
+	import { auth, isLoggedIn, isAuthLoading } from '$lib/auth';
 
 	let activeTab = 'dashboard';
 	let products: Product[] = [];
 	let orders: Order[] = [];
-	let stats: AdminStats | null = null;
+	let stats: { total_products: number; total_orders: number; pending_orders: number; total_revenue: number } | null = null;
 	let loading = true;
 
 	// Product form
@@ -37,9 +40,22 @@
 		{ value: 'delivered', label: '🎉 Delivered' }
 	];
 
+	// Redirect if not logged in
+	$: if (!$isAuthLoading && !$isLoggedIn) {
+		goto('/admin/login');
+	}
+
 	onMount(async () => {
-		await loadData();
+		// Wait for auth to initialize
+		if (!$isAuthLoading && $isLoggedIn) {
+			await loadData();
+		}
 	});
+
+	// Load data when auth state changes
+	$: if (!$isAuthLoading && $isLoggedIn && loading) {
+		loadData();
+	}
 
 	async function loadData() {
 		loading = true;

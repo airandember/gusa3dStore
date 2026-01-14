@@ -1,86 +1,68 @@
-# 🖨️ GUSA3D
+# 🖨️ GUSA3D - Kids 3D Print Shop
 
-**www.gusa3d.store**
+A colorful, fun online store for kids (ages 11-13) to sell their 3D prints! Built by kids, for kids.
 
-A fun, colorful e-commerce store run by kids aged 11-13 who sell 3D printed items!
+**Live Site:** [www.gusa3d.store](https://www.gusa3d.store)
 
-## 🌟 Features
+## 🚀 Architecture
 
-### For Customers:
-- **Browse Products** - View all 3D prints with categories (Fantasy, Space, Dinosaurs, Gaming, etc.)
-- **Shopping Cart** - Add items, update quantities, and checkout
-- **Order Tracking** - Track your order status with a unique tracking code
-- **Kid-to-Kid** - Products made by young makers for young buyers!
+**100% Serverless - Zero Monthly Cost!**
 
-### For Admin (Kid Store Managers):
-- **Dashboard** - View stats (total products, orders, revenue)
-- **Product Management** - Add, edit, and delete products
-- **Order Management** - Update order status with custom messages
-- **Real-time Updates** - See pending orders that need attention
+- **Frontend:** SvelteKit static site on GitHub Pages (FREE)
+- **Database:** Supabase PostgreSQL (FREE - 500MB)
+- **Auth:** Supabase Auth (FREE - 50,000 MAU)
+- **No backend server needed!** 🎉
 
-## 🚀 Local Development
+## 📁 Project Structure
 
-### Prerequisites
-- **Node.js** 18+ 
-
-### 1. Start the Backend (Node.js/Express)
-
-```bash
-cd backend-node
-npm install
-npm start
+```
+gusa3d/
+├── frontend/           # SvelteKit frontend
+│   ├── src/
+│   │   ├── lib/
+│   │   │   ├── api.ts       # Direct Supabase API calls
+│   │   │   ├── auth.ts      # Auth store & functions
+│   │   │   ├── supabase.ts  # Supabase client
+│   │   │   └── stores.ts    # Svelte stores
+│   │   └── routes/          # Pages
+│   └── build/              # Production build
+└── backend-node/       # (Legacy - not needed!)
 ```
 
-The API will start at `http://localhost:8080`
+## 🛠️ Setup
 
-### 2. Start the Frontend (Svelte)
+### 1. Supabase Setup
+
+1. Go to [supabase.com](https://supabase.com) and create a project
+2. Run the schema SQL in SQL Editor (from `backend-node/schema.sql`)
+3. Run security policies (from `frontend/supabase-security.sql`)
+4. Create an admin user in Authentication → Users → Add user
+
+### 2. Frontend Setup
 
 ```bash
 cd frontend
 npm install
+```
+
+Create `.env` file:
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+### 3. Run Development
+
+```bash
 npm run dev
 ```
 
-The store will be available at `http://localhost:5173`
+Open http://localhost:5173 🎉
 
-## ☁️ Deployment
+## 🚀 Deployment
 
-### Backend → Render.com
+### Build & Deploy to GitHub Pages
 
-1. Push your code to GitHub
-2. Go to [Render.com](https://render.com) and create a new **Web Service**
-3. Connect your GitHub repository
-4. Configure:
-   - **Root Directory**: `backend-node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-5. Deploy! Note your URL (e.g., `https://kids-3d-store-api.onrender.com`)
-
-### Frontend → GitHub Pages
-
-1. Update `frontend/.env` with your Render backend URL:
-   ```
-   VITE_API_URL=https://your-app-name.onrender.com
-   ```
-
-2. If deploying to `username.github.io/repo-name`, also set:
-   ```
-   BASE_PATH=/repo-name
-   ```
-
-3. Build the static site:
-   ```bash
-   cd frontend
-   npm run build
-   ```
-
-4. Deploy the `build` folder to GitHub Pages:
-   - Go to your repo Settings → Pages
-   - Choose "Deploy from a branch" 
-   - Select the branch containing your build folder
-   - Or manually push the `build` folder contents to a `gh-pages` branch
-
-**Quick deploy to gh-pages branch:**
 ```bash
 cd frontend
 npm run build
@@ -88,96 +70,61 @@ cd build
 git init
 git add .
 git commit -m "Deploy"
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
 git push -f origin main:gh-pages
 ```
 
-## 📁 Project Structure
+### GitHub Pages Settings
 
-```
-3DEEGusa/
-├── backend-node/           # Node.js/Express API
-│   ├── index.js           # Main server file
-│   ├── package.json       # Dependencies
-│   ├── render.yaml        # Render.com config
-│   └── store.json         # Data file (auto-created)
-│
-├── frontend/              # SvelteKit application
-│   ├── src/
-│   │   ├── routes/        # Pages
-│   │   │   ├── +page.svelte       # Home page
-│   │   │   ├── +layout.svelte     # Main layout
-│   │   │   ├── shop/              # Product catalog
-│   │   │   ├── cart/              # Shopping cart & checkout
-│   │   │   ├── track/             # Order tracking
-│   │   │   └── admin/             # Admin dashboard
-│   │   ├── lib/
-│   │   │   ├── api.ts            # API client
-│   │   │   ├── config.ts         # Configuration
-│   │   │   └── stores.ts         # Svelte stores
-│   │   ├── app.css               # Global styles
-│   │   └── app.html              # HTML template
-│   ├── static/                   # Static assets
-│   └── package.json
-│
-└── README.md
-```
+1. Go to Repository → Settings → Pages
+2. Source: **Deploy from a branch**
+3. Branch: **gh-pages** / **(root)**
+4. Custom domain: `www.gusa3d.store` (if using custom domain)
 
-## 🎨 API Endpoints
+### DNS Setup (for custom domain)
 
-### Products
-- `GET /api/products` - Get all products (optional: `?category=Fantasy`)
-- `GET /api/products/:id` - Get single product
-- `POST /api/products` - Create product
-- `PUT /api/products/:id` - Update product
-- `DELETE /api/products/:id` - Delete product
+Add these records to your domain:
+- **CNAME:** `www` → `airandember.github.io`
+- **A Records:** (for apex domain)
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
 
-### Cart (requires `X-Session-ID` header)
-- `GET /api/cart` - Get cart items
-- `POST /api/cart` - Add to cart
-- `PUT /api/cart/:id` - Update quantity
-- `DELETE /api/cart/:id` - Remove item
-- `DELETE /api/cart` - Clear cart
+## ✨ Features
 
-### Orders
-- `POST /api/orders` - Create order (from cart)
-- `GET /api/orders/:id` - Get order details
-- `GET /api/orders/track/:code` - Track by tracking code
+- 🛒 **Shopping Cart** - Add/remove items, persisted per session
+- 🔍 **Product Categories** - Filter by Fantasy, Toys, Desk Stuff, etc.
+- 📦 **Order Tracking** - Track orders with fun status updates
+- 🎉 **Confetti & Fireworks** - Celebration when adding to cart!
+- 🔐 **Admin Dashboard** - Secure login to manage products & orders
+- 📱 **Mobile Responsive** - Works great on all devices
 
-### Admin
-- `GET /api/admin/orders` - Get all orders
-- `PUT /api/admin/orders/:id` - Update order status
-- `GET /api/admin/stats` - Get dashboard stats
+## 🔐 Admin Access
 
-## 🎭 Demo Products
+1. Navigate to `/admin/login`
+2. Sign in with your Supabase admin credentials
+3. Manage products and orders!
 
-The backend automatically seeds 12 sample products when first started:
-- 🐉 Cute Dragon (Fantasy)
-- 🚀 Rocket Ship (Space)
-- 📱 Phone Stand (Useful)
-- 🦖 Dino T-Rex (Dinosaurs)
-- 🎮 Minecraft Creeper (Gaming)
-- 🌀 Fidget Spinner (Fidgets)
-- 🦄 Unicorn (Fantasy)
-- 🐍 Articulated Snake (Animals)
-- ✏️ Pencil Holder (Useful)
-- 👽 Baby Yoda (Movies)
-- 🐙 Flexi Octopus (Animals)
-- 🔑 Keychain Set (Accessories)
+## 🎨 Tech Stack
 
-## 🎉 Technology Stack
+- **Frontend:** SvelteKit + TypeScript
+- **Styling:** Custom CSS with CSS Variables
+- **Database:** Supabase (PostgreSQL)
+- **Auth:** Supabase Auth
+- **Hosting:** GitHub Pages
+- **Animations:** canvas-confetti
 
-- **Backend**: Node.js + Express (hosted on Render.com)
-- **Frontend**: SvelteKit with static adapter (hosted on GitHub Pages)
-- **Styling**: Custom CSS with CSS variables for theming
-- **Font**: Fredoka (body) + Rubik Bubbles (display)
+## 💰 Cost Breakdown
 
-## 💡 Tips for Kids
+| Service | Cost | Notes |
+|---------|------|-------|
+| GitHub Pages | FREE | Static hosting |
+| Supabase DB | FREE | 500MB database |
+| Supabase Auth | FREE | 50K monthly users |
+| Custom Domain | ~$10/yr | Optional |
+| **Total** | **$0/mo** | 🎉 |
 
-1. **Adding Products**: Go to Admin → Products → Add Product
-2. **Updating Orders**: Go to Admin → Orders → Click "Update Status"
-3. **Tracking Orders**: Share the tracking code with customers!
+## 📝 License
 
----
-
-Made with ❤️ for young entrepreneurs! 🌟
+MIT - Built with ❤️ by GUSA3D team

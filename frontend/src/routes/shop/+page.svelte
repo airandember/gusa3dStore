@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { productApi, cartApi, type Product } from '$lib/api';
+	import { productApi, cartApi } from '$lib/api';
+	import type { Product } from '$lib/supabase';
 	import { cart, toasts, categories, selectedCategory } from '$lib/stores';
 	import confetti from 'canvas-confetti';
 

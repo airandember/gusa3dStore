@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store';
-import type { CartItem, Product } from './api';
+import type { CartItem, Product } from './supabase';
 
 // Cart store
 function createCartStore() {

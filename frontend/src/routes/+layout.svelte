@@ -4,10 +4,15 @@
 	import { onMount } from 'svelte';
 	import { cartApi } from '$lib/api';
 	import { cart } from '$lib/stores';
+	import { auth, isLoggedIn } from '$lib/auth';
 
 	let mobileMenuOpen = false;
 
 	onMount(async () => {
+		// Initialize auth
+		await auth.initialize();
+		
+		// Load cart
 		try {
 			const items = await cartApi.get();
 			cart.set(items);
@@ -15,6 +20,15 @@
 			console.error('Failed to load cart:', e);
 		}
 	});
+
+	async function handleLogout() {
+		try {
+			await auth.signOut();
+			toasts.show('Logged out successfully', 'info');
+		} catch (e) {
+			console.error('Logout error:', e);
+		}
+	}
 </script>
 
 <div class="app-wrapper">
@@ -44,10 +58,21 @@
 						<span class="nav-icon">📦</span>
 						<span>Track Order</span>
 					</a>
+					{#if $isLoggedIn}
 					<a href="/admin" class="nav-link admin-link">
 						<span class="nav-icon">⚙️</span>
 						<span>Admin</span>
 					</a>
+					<button class="nav-link logout-btn" on:click={handleLogout}>
+						<span class="nav-icon">🚪</span>
+						<span>Logout</span>
+					</button>
+				{:else}
+					<a href="/admin/login" class="nav-link admin-link">
+						<span class="nav-icon">🔐</span>
+						<span>Admin</span>
+					</a>
+				{/if}
 					<a href="/cart" class="nav-link cart-link">
 						<span class="cart-icon">🛒</span>
 						{#if $cartCount > 0}

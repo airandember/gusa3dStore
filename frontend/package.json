@@ -18,6 +18,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
     "canvas-confetti": "^1.9.4"
   }
 }
